@@ -1,19 +1,8 @@
 body {
-    background-color: lightblue;
-  }
-
-  .buttons{
-    background-color: white;
-    border-radius: 0px 0px 0px 20px;
-  }
-
-  .actions{
-    background-color: white;
-    border-radius: 0px 0px 0px 20px;
+    background-color: rgb(198, 241, 255);
   }
 
 .grid-container {
-    align-self: center;
     display: inline-grid ; /* inline-grid */
     width:30%;
     grid-template-columns: auto auto auto auto;
@@ -24,6 +13,9 @@ body {
     font-family: 'Lato', sans-serif;
     font-size: 30px;
     font-weight: bold;
+
+    margin: 100px;
+    padding: 3px;
   }
   
   .grid-container > div {
@@ -103,4 +95,10 @@ body {
     transform: translate(-50%, -50%)
     }
 
-
+    .flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+      }
