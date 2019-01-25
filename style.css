@@ -1,0 +1,106 @@
+body {
+    background-color: lightblue;
+  }
+
+  .buttons{
+    background-color: white;
+    border-radius: 0px 0px 0px 20px;
+  }
+
+  .actions{
+    background-color: white;
+    border-radius: 0px 0px 0px 20px;
+  }
+
+.grid-container {
+    align-self: center;
+    display: inline-grid ; /* inline-grid */
+    width:30%;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 2px;
+    background-color: black;
+    padding: 0px;
+    border-radius: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .grid-container > div {
+    /* background-color: rgba(255, 255, 255, 0.8); */
+    /* text-align: center; */
+    padding: 15px;
+
+  }
+
+  .item1 {
+    /* grid-column: 1 / 5; */
+    background-color: black;
+    color: white;
+    text-align: right;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    border-radius: 20px 20px 0px 0px;
+
+  }
+
+  .item5{
+    background-color: orangered;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: 8;
+    border-radius: 0px 0px 20px 0px;
+    vertical-align: center;
+    text-align: center;
+    position: relative;
+  }
+  
+  .item16{
+    background-color: white;
+    vertical-align: center;
+    text-align: center;
+    border-radius: 0px 0px 0px 20px;
+  }
+
+  .item2, .item3, .item4, .item6 {
+    background-color:rgb(102, 102, 102);
+    vertical-align: center;
+    text-align: center;
+  }
+
+  .item2:hover, .item3:hover, .item4:hover, .item6:hover {
+    background-color:rgb(168, 168, 168);
+  }
+
+  .item2, .item3, .item4, .item6 {
+    background-color:rgb(122, 122, 122);
+
+  }
+
+  .item7, .item8, .item9, .item10, .item11, .item12, .item13, .item14, .item15, .item16, .item17, .item18{
+    background-color: white;
+    vertical-align: center;
+    text-align: center;
+  }
+  
+  .item5:hover {
+    /* background-color: orangered; */
+    background-color: red;
+  }
+
+  .item7:hover, .item8:hover, .item9:hover, .item10:hover, .item11:hover, .item12:hover, .item13:hover, .item14:hover, .item15:hover, .item16:hover, .item17:hover, .item18:hover{
+    background-color: lightgray;
+  }
+
+  .Centred {      
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+    }
+
+
