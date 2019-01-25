@@ -1,5 +1,5 @@
-let entryField = document.querySelector('.');
-let signs = document.querySelector('.');
+let entryField = document.getElementById('Screen');
+let signs = document.querySelector('.signs');
 
 function resolve(str) {
     let elements = str.split(' ');
@@ -27,38 +27,57 @@ function resolve(str) {
 }
 
 function getExample() {
-    let example = [];
+    let example = '';
+    let number = ''
+    let currentSign = '';
+    let dot = '';
+    let a = '';
 
     signs.addEventListener('click', (e) => {
-        let sign = e.target.value;
+        let sign = e.target.innerText;
 
-        let number = ''
-        let currentSign = '';
+        if (!isNaN(sign)) {
+            console.log('in');
 
-        if (typeof (+sign) === 'number') {
-            entryField.innerText = sign;
-
-            if (sign === '.') {
-                entryField.innerText = `${number}${sign}`;
-                number += sign;
-            }
             number += sign;
-            currentSign = '';
-        } 
+            //currentSign = '';                    
+        } else if (sign === '.') {
+            if (dot === '.') {
+                number += '';
+                dot = '.';
+            } else {
+                number += sign;
+                dot = '.';
+            }
+        }
 
-        example.push(number);
+        entryField.innerText = number;
+
+        example += number[number.length-1];
+        console.log(example);
+        console.log(number);
+
 
         if ((sign === '+') || (sign === '-') || (sign === '*') || (sign === '/')) {
-            example.push(sign);
             if ((currentSign === '+') || (currentSign === '-') || (currentSign === '*') || (currentSign === '/')) {
-                exapmle.pop();
-                example.push(currentSign);
-            }
+                example += '';
+            }         
+        
+
+            //entryField.innerText = ;
+            example += ` ${sign}`;
+
+            number = '';
+
+            console.log('dasdas', example);
+
+            
             currentSign = sign; 
         }
 
         if (sign === 'C') {
             entryField.innerText = 0;
+            number = 0;
         }
 
         if (sign === '=') {
@@ -66,6 +85,7 @@ function getExample() {
         }
     })
 
-    return example.join(' ');
+    return example;
 }
 
+getExample();
