@@ -2,7 +2,7 @@ body {
     background-color: rgb(198, 241, 255);
   }
 
-.grid-container {
+.signs {
     display: inline-grid ; /* inline-grid */
     width:30%;
     grid-template-columns: auto auto auto auto;
@@ -101,4 +101,8 @@ body {
         align-items: center;
         height: 100%;
         width: 100%;
+      }
+
+      .signs{
+          display: inline;
       }

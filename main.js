@@ -21,23 +21,12 @@ function onLoad() {
 
 
 
-    var Action = document.querySelector('actions');
+    var Action = document.querySelector('.item5');
 
     Action.addEventListener('click', function () {
-        Screen = document.getElementById("Screen");
-
-        Screen.innerHTML = "ОБАНА!!!";
+        Screen = document.getElementById("Screen"); 
         Screen.innerText = "ОБАНА!!!";
-        Screen.outerText = "ОБАНА!!!";
-        console.log(Screen);
-
-
-
-
     });
-
-
-
 }
 
 
