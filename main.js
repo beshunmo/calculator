@@ -1,32 +1,85 @@
-function onLoad() {
+const numbers = document.querySelectorAll('.number');
+const orations = document.querySelectorAll('.opearion');
+const dot = document.querySelector('.dot');
+const clearBtn = document.querySelector('.clear');
+const display = document.querySelector('#screen');
+console.log(numbers);
 
-    // var box = document.querySelector('.box');
-    // var colorInput = document.getElementById('color');
-    // var changeColorButton = document.querySelector('.change-color');
-    // var styleInput = document.getElementById('style');
-    // var styleValue = document.getElementById('styleValue');
-    // changeColorButton.addEventListener('click', function () {
-    //     var color = colorInput.value;
-    //     box.style.backgroundColor = color;
-    // });
-            // var myStyle = styleInput.value;
-        // var myValue = styleValue.value;
-        // box.style[myStyle] = myValue;
-        // console.log(Screen);
-        // console.log(Screen.innerHTML);
-        // console.log(Screen.innerText);
+let memoryCurrentNumber = 0;
+let memoryNewNumber = false;
+let memoryOperation = '';
 
-    let Screen = document.getElementsByClassName('item1')
-    console.log(Screen);
-
-
-
-    var Action = document.querySelector('.item5');
-
-    Action.addEventListener('click', function () {
-        Screen = document.getElementById("Screen"); 
-        Screen.innerText = "ОБАНА!!!";
-    });
+for (let i = 0; i < numbers.length; i++) {
+    let number = numbers[i];
+    number.addEventListener('click', (e) => {
+        pressNumber(e.target.innerText);
+        console.log('Клавиша с цифрой');
+    })
 }
 
+for (let i = 0; i < orations.length; i++) {
+    let operation = orations[i];
+    operation.addEventListener('click', (e) => {
+        pressOperation(e.target.innerText);
+    })
+}
 
+dot.addEventListener('click', pressDot);
+clearBtn.addEventListener('click', clear);
+
+function pressNumber(num) {
+    if (memoryNewNumber) {
+        display.innerText = num;
+        memoryNewNumber = false;
+    } else {
+        if (display.innerText === '0') {
+            display.innerText = num;
+        } else {
+            display.innerText += num;
+        }
+    }
+}
+
+function pressOperation(operation) {
+    let localMemoryOperatin = display.innerText;
+
+    if (memoryNewNumber && memoryOperation !== '=') {
+        display.innerText = memoryCurrentNumber;
+    } else {
+        memoryNewNumber = true;
+        if (memoryOperation === '+') {
+            memoryCurrentNumber += parseFloat(localMemoryOperatin);
+        } else if (memoryOperation === '-') {
+            memoryCurrentNumber -= parseFloat(localMemoryOperatin);
+        } else if (memoryOperation === '*') {
+            memoryCurrentNumber *= parseFloat(localMemoryOperatin);
+        } else if (memoryOperation === '/') {
+            memoryCurrentNumber /= parseFloat(localMemoryOperatin);
+        } else {
+            memoryCurrentNumber = parseFloat(localMemoryOperatin);
+        }
+        memoryOperation = operation;
+
+        display.innerText = memoryCurrentNumber;
+    }
+}
+
+function clear() {
+    display.innerText = '0';
+    memoryNewNumber = true;
+    memoryCurrentNumber = 0;
+    memoryNewNumber = '';
+}
+
+function pressDot() {
+    let localMemmoryDot = display.innerText;
+    if (memoryNewNumber) {
+        localMemmoryDot = '0.';
+        memoryNewNumber = false;
+    } else {
+        if (localMemmoryDot.indexOf('.') === -1) {
+            localMemmoryDot += '.';
+        }
+    }
+    display.innerText = localMemmoryDot;
+}
