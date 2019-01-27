@@ -1,91 +1,85 @@
-let entryField = document.getElementById('Screen');
-let signs = document.querySelector('.signs');
+const numbers = document.querySelectorAll('.number');
+const orations = document.querySelectorAll('.opearion');
+const dot = document.querySelector('.dot');
+const clearBtn = document.querySelector('.clear');
+const display = document.querySelector('#screen');
+console.log(numbers);
 
-function resolve(str) {
-    let elements = str.split(' ');
-    var resolved = 0;
+let memoryCurrentNumber = 0;
+let memoryNewNumber = false;
+let memoryOperation = '';
 
-    for (let i = 0; i < elements.length; i++) {
-        if (elements[i] === '+') {
-            resolved += (+elements[i + 1]);
-            i++;
-        } else if (elements[i] === '-') {
-            resolved -= (+elements[i + 1]);
-            i++;
-        } else if (elements[i] === '*') {
-            resolved *= (+elements[i + 1]);
-            i++;
-        } else if (elements[i] === '/') {
-            resolved /= (+elements[i + 1]);
-            i++;
+for (let i = 0; i < numbers.length; i++) {
+    let number = numbers[i];
+    number.addEventListener('click', (e) => {
+        pressNumber(e.target.innerText);
+        console.log('Клавиша с цифрой');
+    })
+}
+
+for (let i = 0; i < orations.length; i++) {
+    let operation = orations[i];
+    operation.addEventListener('click', (e) => {
+        pressOperation(e.target.innerText);
+    })
+}
+
+dot.addEventListener('click', pressDot);
+clearBtn.addEventListener('click', clear);
+
+function pressNumber(num) {
+    if (memoryNewNumber) {
+        display.innerText = num;
+        memoryNewNumber = false;
+    } else {
+        if (display.innerText === '0') {
+            display.innerText = num;
         } else {
-            resolved += (+elements[i]);
+            display.innerText += num;
         }
     }
-
-    return resolved;
 }
 
-function getExample() {
-    let example = '';
-    let number = ''
-    let currentSign = '';
-    let dot = '';
-    let a = '';
+function pressOperation(operation) {
+    let localMemoryOperatin = display.innerText;
 
-    signs.addEventListener('click', (e) => {
-        let sign = e.target.innerText;
-
-        if (!isNaN(sign)) {
-            console.log('in');
-
-            number += sign;
-            //currentSign = '';                    
-        } else if (sign === '.') {
-            if (dot === '.') {
-                number += '';
-                dot = '.';
-            } else {
-                number += sign;
-                dot = '.';
-            }
+    if (memoryNewNumber && memoryOperation !== '=') {
+        display.innerText = memoryCurrentNumber;
+    } else {
+        memoryNewNumber = true;
+        if (memoryOperation === '+') {
+            memoryCurrentNumber += parseFloat(localMemoryOperatin);
+        } else if (memoryOperation === '-') {
+            memoryCurrentNumber -= parseFloat(localMemoryOperatin);
+        } else if (memoryOperation === '*') {
+            memoryCurrentNumber *= parseFloat(localMemoryOperatin);
+        } else if (memoryOperation === '/') {
+            memoryCurrentNumber /= parseFloat(localMemoryOperatin);
+        } else {
+            memoryCurrentNumber = parseFloat(localMemoryOperatin);
         }
+        memoryOperation = operation;
 
-        entryField.innerText = number;
-
-        example += number[number.length-1];
-        console.log(example);
-        console.log(number);
-
-
-        if ((sign === '+') || (sign === '-') || (sign === '*') || (sign === '/')) {
-            if ((currentSign === '+') || (currentSign === '-') || (currentSign === '*') || (currentSign === '/')) {
-                example += '';
-            }         
-        
-
-            //entryField.innerText = ;
-            example += ` ${sign}`;
-
-            number = '';
-
-            console.log('dasdas', example);
-
-            
-            currentSign = sign; 
-        }
-
-        if (sign === 'C') {
-            entryField.innerText = 0;
-            number = 0;
-        }
-
-        if (sign === '=') {
-            resolve(getExample());
-        }
-    })
-
-    return example;
+        display.innerText = memoryCurrentNumber;
+    }
 }
 
-getExample();
+function clear() {
+    display.innerText = '0';
+    memoryNewNumber = true;
+    memoryCurrentNumber = 0;
+    memoryNewNumber = '';
+}
+
+function pressDot() {
+    let localMemmoryDot = display.innerText;
+    if (memoryNewNumber) {
+        localMemmoryDot = '0.';
+        memoryNewNumber = false;
+    } else {
+        if (localMemmoryDot.indexOf('.') === -1) {
+            localMemmoryDot += '.';
+        }
+    }
+    display.innerText = localMemmoryDot;
+}
