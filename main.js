@@ -42,9 +42,10 @@ function pressNumber(num) {
 
 function pressOperation(operation) {
     let localMemoryOperatin = display.innerText;
-
+    
     if (memoryNewNumber && memoryOperation !== '=') {
         display.innerText = memoryCurrentNumber;
+        memoryOperation = operation;
     } else {
         memoryNewNumber = true;
         if (memoryOperation === '+') {
@@ -58,7 +59,7 @@ function pressOperation(operation) {
         } else {
             memoryCurrentNumber = parseFloat(localMemoryOperatin);
         }
-        memoryOperation = operation;
+        console.log(memoryOperation);
 
         display.innerText = memoryCurrentNumber;
     }
